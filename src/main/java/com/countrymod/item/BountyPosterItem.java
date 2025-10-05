@@ -6,7 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -19,8 +19,8 @@ public class BountyPosterItem extends Item {
 	}
 	
 	@Override
-	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-		if (world.isClient) {
+	public ActionResult use(World world, PlayerEntity user, Hand hand) {
+		if (world.isClient()) {
 			MinecraftClient client = MinecraftClient.getInstance();
 			client.execute(() -> {
 				client.setScreen(new BountyBoardScreen());
@@ -28,6 +28,6 @@ public class BountyPosterItem extends Item {
 		} else {
 			user.sendMessage(Text.literal("§6[BOUNTY BOARD] §fOpening wanted list..."), false);
 		}
-		return TypedActionResult.success(user.getStackInHand(hand));
+		return ActionResult.SUCCESS);
 	}
 }

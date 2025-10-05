@@ -1,26 +1,9 @@
-modules = ["java-graalvm22.3"]
+modules = ["java-graalvm22.3", "java-21"]
 [agent]
 expertMode = true
 
 [workflows]
-runButton = "Project"
 
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Build Mod"
-
-[[workflows.workflow]]
-name = "Build Mod"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "./gradlew build --no-daemon"
-
-[workflows.workflow.metadata]
-outputType = "console"
+[nix]
+channel = "stable-25_05"
+packages = ["gradle"]

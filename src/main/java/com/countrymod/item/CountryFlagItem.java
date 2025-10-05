@@ -7,7 +7,7 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -24,7 +24,7 @@ public class CountryFlagItem extends Item {
 	public ActionResult useOnBlock(ItemUsageContext context) {
 		World world = context.getWorld();
 		
-		if (world.isClient) {
+		if (world.isClient()) {
 			// Open country creation GUI on client
 			MinecraftClient client = MinecraftClient.getInstance();
 			client.execute(() -> {
@@ -36,10 +36,10 @@ public class CountryFlagItem extends Item {
 	}
 	
 	@Override
-	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-		if (world.isClient) {
+	public ActionResult use(World world, PlayerEntity user, Hand hand) {
+		if (world.isClient()) {
 			user.sendMessage(Text.literal("Place the flag on the ground to create your country!"), false);
 		}
-		return TypedActionResult.pass(user.getStackInHand(hand));
+		return ActionResult.PASS);
 	}
 }

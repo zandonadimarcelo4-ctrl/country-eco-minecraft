@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
 
 /**
@@ -20,8 +20,8 @@ public class BlackMarketPassItem extends Item {
 	}
 	
 	@Override
-	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-		if (world.isClient) {
+	public ActionResult use(World world, PlayerEntity user, Hand hand) {
+		if (world.isClient()) {
 			MinecraftClient client = MinecraftClient.getInstance();
 			client.execute(() -> {
 				client.setScreen(new BlackMarketScreen());
@@ -29,6 +29,6 @@ public class BlackMarketPassItem extends Item {
 		} else {
 			user.sendMessage(Text.literal("§8§l[BLACK MARKET] §7Psst... looking for something special?"), false);
 		}
-		return TypedActionResult.success(user.getStackInHand(hand));
+		return ActionResult.SUCCESS);
 	}
 }
