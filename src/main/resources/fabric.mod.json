@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "countrymod",
+	"version": "${version}",
+	"name": "Country System Mod",
+	"description": "A comprehensive country system mod with governments, military, colonies, and diplomacy",
+	"authors": [
+		"CountryMod Team"
+	],
+	"contact": {
+		"sources": "https://github.com/countrymod/countrymod"
+	},
+	"license": "MIT",
+	"icon": "assets/countrymod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.countrymod.CountryMod"
+		],
+		"client": [
+			"com.countrymod.CountryModClient"
+		]
+	},
+	"mixins": [
+		"countrymod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
