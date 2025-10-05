@@ -1,0 +1,86 @@
+I want to create a Minecraft 1.21.9 Fabric mod in Java/Kotlin that implements a full country system with governments, citizens, PvP takeover, colonies, independence, military, economy, and diplomacy. The mod should be highly interactive, visual, and immersive, minimizing command usage and relying on GUI and world interactions. Key features:
+
+1. Country Creation
+- Players create a country by placing a special "country flag" item in the world.
+- When placing the flag, a GUI opens to choose:
+  - Country name
+  - Government type: Republic, Monarchy, Dictatorship, Tribe
+  - Initial claim area (visualized with particles or transparent blocks)
+- Government affects succession rules:
+  - Republic: leader can be replaced via citizen voting
+  - Monarchy: heir system; PvP takeover possible
+  - Dictatorship: only force (PvP) can replace leader
+  - Tribe: strongest player in combat becomes leader
+
+2. Citizenship and Membership
+- Citizens: full rights, build, vote, join military
+- Residents: limited rights, may need visa approval
+- Visitors: restricted entry; cannot build or access resources
+- Leaders manage permissions via GUI
+- Visa system: players can request access via GUI; leader approves/rejects visually
+- Citizenship progression: Visitor → Resident → Citizen based on time, contribution, or approval
+
+3. PvP Takeover and Combat
+- To capture a country:
+  - Kill the current leader
+  - Capture the country's flag within a time window
+- Visual alerts: floating particles, banners showing “under attack” status
+- Cooldowns prevent instant re-takeovers
+- Members remain part of the country after takeover
+- Optional reputation/bounty system affecting alliances and player interactions
+
+4. Military System
+- Citizens can enlist in military with ranks (Soldier, Captain, General)
+- Military affects PvP buffs and abilities inside country territory
+- Leaders or officers can call wars or defenses via GUI
+- Military management mostly via interactive panels instead of commands
+
+5. Colonies and Expansion
+- Countries can establish colonies by placing a "colony flag"
+- Colony types:
+  - Exploration (temporary, resource gathering)
+  - Settlement (permanent, citizen hosting, resource generation)
+- Colonies have governors appointed via GUI
+- Colonies can request independence after conditions met (time, self-sufficiency, player request)
+- Independence becomes a new country; GUI allows selection of government type
+- Parent country may negotiate or reject; rebellion mechanics apply if denied
+
+6. Economy and Diplomacy
+- Treasury system: taxes from citizens/residents contribute resources
+- Salaries for military, trade between countries via GUI panels
+- Diplomacy: alliances, treaties, wars managed visually
+- Colonies contribute resources until independence
+- Morale system: citizen satisfaction affects productivity, military efficiency, loyalty
+
+7. Visual and Interactive Features
+- Territory boundaries visualized with particles or semi-transparent blocks
+- Flags represent country/colony status (normal, under attack, captured)
+- HUD elements showing country info, morale, military strength, treasury
+- Menus/GUI for: member management, citizenship, military, colonies, diplomacy, war preparation
+- Minimize commands; most actions are GUI/world-interactive
+
+8. Data Persistence
+- Store countries, leaders, members, citizens, residents, visitors, colonies, military, economy, and cooldowns in JSON or database
+- Ensure data survives server restart and multiplayer sessions
+
+9. Balance and Fairness
+- Cooldowns for wars, takeovers, colony independence
+- Costs for founding countries, declaring wars, creating colonies
+- Reputation affects alliances and citizen loyalty
+- Logging and rollback systems prevent griefing and abuse
+- Optional dynamic events: natural disasters, invasions, or global world events to maintain gameplay interest
+
+10. Implementation Notes
+- Modular design to allow future expansions
+- Event listeners for player death, PvP in country territory, flag capture, block interaction, and GUI events
+- Written in Java or Kotlin for Fabric API 1.21.9
+- Include comments and placeholders for adding additional mechanics like trade bonuses, morale effects, and colony independence logic
+
+Please generate a **starter Fabric mod skeleton** with:
+- Main mod class
+- Classes for Country, Colony, Citizen, MilitaryRank
+- Event listeners for PvP takeover and flag capture
+- GUI panels for country creation, member management, military, colonies, and diplomacy
+- JSON-based persistence system
+- Visual representation for territory boundaries and flag status
+- Comments indicating where to expand features
