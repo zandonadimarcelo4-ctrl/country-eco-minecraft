@@ -12,15 +12,15 @@ import net.minecraft.world.World;
  * Handcuffs - Use on another player to arrest them (if you have authority)!
  */
 public class HandcuffsItem extends Item {
-	public HandcuffsItem(Settings settings) {
-		super(settings.maxCount(16));
-	}
-	
-	@Override
-	public ActionResult use(World world, PlayerEntity user, Hand hand) {
-		if (!world.isClient()) {
-			user.sendMessage(Text.literal("§c[POLICE] §fRight-click on a player to attempt arrest!"), false);
-		}
-		return ActionResult.SUCCESS);
-	}
+        public HandcuffsItem(Settings settings) {
+                super(settings.maxCount(16));
+        }
+        
+        @Override
+        public ActionResult use(World world, PlayerEntity user, Hand hand) {
+                if (!world.isClient()) {
+                        user.sendMessage(Text.literal("§c[POLICE] §fRight-click on a player to attempt arrest!"), false);
+                }
+                return ActionResult.SUCCESS;
+        }
 }

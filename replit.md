@@ -76,13 +76,16 @@ src/main/java/com/countrymod/
 ```
 
 ## Recent Changes
-- **2025-10-05**: Initial project setup
-  - Created complete country system structure
-  - Integrated Brazilian economy system (CPF, PIX, loans, investments)
-  - Implemented PvP takeover mechanics
-  - Added GUI screens for country/colony creation
-  - Set up JSON-based data persistence
-  - Created territory management system
+- **2025-10-05**: Complete economy and feature expansion
+  - Fixed all compilation errors (Java 21, item classes, PvP handlers)
+  - Added comprehensive Banking System with credit scores, loan management, and savings accounts
+  - Implemented Auction House for competitive item bidding with auto-expiration
+  - Integrated Secure Trade System with anti-scam protections
+  - Added Tax System for country revenue generation
+  - Created War System for country conflicts with territory stakes
+  - Built Alliance System for diplomatic relationships
+  - Set up automated build workflow with Gradle
+  - All systems fully functional with REI$ currency integration
 
 ## Development Status
 
@@ -90,23 +93,27 @@ src/main/java/com/countrymod/
 - ✅ Core data models (Country, Colony, Citizen, Military)
 - ✅ Economy system (Accounts, CPF, Transactions, Loans, Investments)
 - ✅ Country and economy managers
+- ✅ Advanced Banking System (credit scores, loan applications, savings accounts)
+- ✅ Auction House (competitive bidding, auto-expiration, seller fees)
+- ✅ Secure Trading System (anti-scam protections, confirmation flow)
+- ✅ Tax System (configurable rates, collection, treasury management)
+- ✅ War System (declarations, territory stakes, alliances)
+- ✅ Alliance System (diplomatic relationships, betrayal tracking)
 - ✅ Basic GUI screens
 - ✅ Event handlers for PvP and player connections
 - ✅ JSON persistence framework
+- ✅ Build configuration and Gradle workflow
 
 ### In Progress
-- 🔨 Build configuration and compilation
 - 🔨 Network packet system for client-server communication
 - 🔨 Visual territory boundaries with particles
 
 ### Planned
-- ⏳ Complete diplomacy system (alliances, treaties, wars)
-- ⏳ Full treasury and tax collection
-- ⏳ Morale and reputation systems
 - ⏳ Colony independence negotiations
 - ⏳ HUD overlay with real-time information
 - ⏳ Admin commands for server management
 - ⏳ Dynamic world events
+- ⏳ Morale and reputation systems
 
 ## Building the Mod
 

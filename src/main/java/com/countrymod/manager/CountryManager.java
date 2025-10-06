@@ -1,5 +1,6 @@
 package com.countrymod.manager;
 
+import com.countrymod.CountryMod;
 import com.countrymod.model.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -21,22 +22,33 @@ public class CountryManager {
         }
         
         /**
-         * Create a new country
+         * Cria um novo país com mensagens traduzidas para português.
          */
         public Country createCountry(String name, GovernmentType governmentType, BlockPos flagPos, UUID leaderId, String leaderName, String cpf) {
+                if (name == null || name.isEmpty()) {
+                        CountryMod.LOGGER.error("O nome do país não pode estar vazio.");
+                        return null;
+                }
+
+                if (getCountryByFlag(flagPos) != null) {
+                        CountryMod.LOGGER.error("Já existe um país registrado nesta posição de bandeira.");
+                        return null;
+                }
+
                 Country country = new Country(name, governmentType, flagPos, leaderId);
-                
-                // Add leader as a citizen with CPF
+
+                // Adicionar o líder como cidadão com CPF
                 Citizen leader = new Citizen(leaderId, leaderName, CitizenshipLevel.CITIZEN);
                 leader.setLeader(true);
-                leader.setCpf(cpf); // Set CPF as citizen identifier
+                leader.setCpf(cpf); // Definir CPF como identificador do cidadão
                 country.addCitizen(leader);
-                
-                // Register country
+
+                // Registrar o país
                 countries.put(country.getCountryId(), country);
                 playerCountries.put(leaderId, country.getCountryId());
                 flagPositions.put(flagPos, country.getCountryId());
-                
+
+                CountryMod.LOGGER.info("País '{}' criado com sucesso! Líder: {}", name, leaderName);
                 return country;
         }
         
@@ -110,23 +122,39 @@ public class CountryManager {
         }
         
         /**
-         * Attempt flag capture for takeover
+         * Captura de bandeira com mensagens traduzidas.
          */
         public boolean attemptFlagCapture(BlockPos flagPos, UUID playerUuid) {
                 Country country = getCountryByFlag(flagPos);
-                if (country != null && country.isUnderAttack() && 
-                    country.getAttackerId().equals(playerUuid) && 
-                    country.isTakeoverWindowActive()) {
-                        country.completeTakeover(playerUuid);
-                        
-                        // Add attacker as citizen if not already
-                        if (country.getCitizen(playerUuid) == null) {
-                                addCitizenToCountry(country.getCountryId(), playerUuid, "", CitizenshipLevel.CITIZEN, "");
-                        }
-                        
-                        return true;
+                if (country == null) {
+                        CountryMod.LOGGER.error("Nenhum país encontrado nesta posição de bandeira.");
+                        return false;
                 }
-                return false;
+
+                if (!country.isUnderAttack()) {
+                        CountryMod.LOGGER.error("O país não está sob ataque. Captura de bandeira não permitida.");
+                        return false;
+                }
+
+                if (!country.getAttackerId().equals(playerUuid)) {
+                        CountryMod.LOGGER.error("Apenas o atacante pode capturar a bandeira.");
+                        return false;
+                }
+
+                if (!country.isTakeoverWindowActive()) {
+                        CountryMod.LOGGER.error("A janela de captura não está ativa.");
+                        return false;
+                }
+
+                country.completeTakeover(playerUuid);
+
+                // Adicionar o atacante como cidadão, se ainda não for
+                if (country.getCitizen(playerUuid) == null) {
+                        addCitizenToCountry(country.getCountryId(), playerUuid, "", CitizenshipLevel.CITIZEN, "");
+                }
+
+                CountryMod.LOGGER.info("Captura de bandeira concluída com sucesso! País agora sob controle do jogador {}.", playerUuid);
+                return true;
         }
         
         /**

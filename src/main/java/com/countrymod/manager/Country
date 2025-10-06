@@ -1,0 +1,21 @@
+package com.countrymod.country;
+
+import java.util.*;
+
+public class Country {
+    private final String name;
+    private final GovernmentType governmentType;
+    private final UUID owner;
+    private final List<UUID> citizens = new ArrayList<>();
+
+    public Country(String name, GovernmentType governmentType, UUID owner) {
+        this.name = name;
+        this.governmentType = governmentType;
+        this.owner = owner;
+    }
+
+    public String getName() { return name; }
+    public GovernmentType getGovernmentType() { return governmentType; }
+    public List<UUID> getCitizens() { return citizens; }
+    public UUID getOwner() { return owner; }
+}

@@ -1,0 +1,12 @@
+package com.countrymod.country;
+
+public enum GovernmentType {
+    DEMOCRACY("Democracia"),
+    MONARCHY("Monarquia"),
+    DICTATORSHIP("Ditadura");
+
+    private final String displayName;
+
+    GovernmentType(String displayName) { this.displayName = displayName; }
+    public String getDisplayName() { return displayName; }
+}

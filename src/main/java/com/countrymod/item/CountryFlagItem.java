@@ -1,4 +1,5 @@
 package com.countrymod.item;
+
 import com.countrymod.client.gui.CountryCreationScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,39 +8,46 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ActionResult;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 /**
  * Special item used to create a country.
- * Right-clicking on the ground opens the country creation GUI.
+ * Right-clicking on the ground opens the country creation GUI (client-side only).
  */
 public class CountryFlagItem extends Item {
-	public CountryFlagItem(Settings settings) {
-		super(settings.maxCount(1));
-	}
-	
-	@Override
-	public ActionResult useOnBlock(ItemUsageContext context) {
-		World world = context.getWorld();
-		
-		if (world.isClient()) {
-			// Open country creation GUI on client
-			MinecraftClient client = MinecraftClient.getInstance();
-			client.execute(() -> {
-				client.setScreen(new CountryCreationScreen(context.getBlockPos().up()));
-			});
-		}
-		
-		return ActionResult.SUCCESS;
-	}
-	
-	@Override
-	public ActionResult use(World world, PlayerEntity user, Hand hand) {
-		if (world.isClient()) {
-			user.sendMessage(Text.literal("Place the flag on the ground to create your country!"), false);
-		}
-		return ActionResult.PASS);
-	}
+    public CountryFlagItem(Settings settings) {
+        super(settings.maxCount(1));
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        World world = context.getWorld();
+
+        if (world.isClient()) {
+            openScreen(context);
+        }
+
+        return ActionResult.SUCCESS;
+    }
+
+    @Override
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
+        if (world.isClient()) {
+            user.sendMessage(Text.literal("Place the flag on the ground to create your country!"), false);
+        }
+        return ActionResult.PASS;
+    }
+
+    /**
+     * Opens the country creation screen (client-only).
+     */
+    @Environment(EnvType.CLIENT)
+    private void openScreen(ItemUsageContext context) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        client.execute(() -> {
+            client.setScreen(new CountryCreationScreen(context.getBlockPos().up()));
+        });
+    }
 }

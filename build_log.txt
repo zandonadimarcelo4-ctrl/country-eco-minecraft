@@ -1,0 +1,88 @@
+Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+.............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%..............100%
+
+Welcome to Gradle 8.14!
+
+Here are the highlights of this release:
+ - Java 24 support
+ - GraalVM Native Image toolchain selection
+ - Enhancements to test reporting
+ - Build Authoring improvements
+
+For more details see https://docs.gradle.org/8.14/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Fabric Loom: 1.11.8
+:remapping sources
+
+> Task :compileJava
+/home/runner/workspace/src/main/java/com/countrymod/item/BlackMarketPassItem.java:32: error: ';' expected
+		return ActionResult.SUCCESS);
+		                           ^
+/home/runner/workspace/src/main/java/com/countrymod/item/BountyPosterItem.java:31: error: ';' expected
+		return ActionResult.SUCCESS);
+		                           ^
+/home/runner/workspace/src/main/java/com/countrymod/item/ColonyFlagItem.java:43: error: ';' expected
+		return ActionResult.PASS);
+		                        ^
+/home/runner/workspace/src/main/java/com/countrymod/item/CountryFlagItem.java:43: error: ';' expected
+		return ActionResult.PASS);
+		                        ^
+/home/runner/workspace/src/main/java/com/countrymod/item/HandcuffsItem.java:24: error: ';' expected
+		return ActionResult.SUCCESS);
+		                           ^
+/home/runner/workspace/src/main/java/com/countrymod/item/LotteryTicketItem.java:31: error: ';' expected
+		return ActionResult.SUCCESS);
+		                           ^
+/home/runner/workspace/src/main/java/com/countrymod/item/ProtestSignItem.java:31: error: ';' expected
+		return ActionResult.SUCCESS);
+		                           ^
+/home/runner/workspace/src/main/java/com/countrymod/item/WeddingRingItem.java:31: error: ';' expected
+		return ActionResult.SUCCESS);
+		                           ^
+8 errors
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///home/runner/workspace/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  /home/runner/workspace/src/main/java/com/countrymod/item/BlackMarketPassItem.java:32: error: ';' expected
+  		return ActionResult.SUCCESS);
+  		                           ^
+  /home/runner/workspace/src/main/java/com/countrymod/item/BountyPosterItem.java:31: error: ';' expected
+  		return ActionResult.SUCCESS);
+  		                           ^
+  /home/runner/workspace/src/main/java/com/countrymod/item/ColonyFlagItem.java:43: error: ';' expected
+  		return ActionResult.PASS);
+  		                        ^
+  /home/runner/workspace/src/main/java/com/countrymod/item/CountryFlagItem.java:43: error: ';' expected
+  		return ActionResult.PASS);
+  		                        ^
+  /home/runner/workspace/src/main/java/com/countrymod/item/HandcuffsItem.java:24: error: ';' expected
+  		return ActionResult.SUCCESS);
+  		                           ^
+  /home/runner/workspace/src/main/java/com/countrymod/item/LotteryTicketItem.java:31: error: ';' expected
+  		return ActionResult.SUCCESS);
+  		                           ^
+  /home/runner/workspace/src/main/java/com/countrymod/item/ProtestSignItem.java:31: error: ';' expected
+  		return ActionResult.SUCCESS);
+  		                           ^
+  /home/runner/workspace/src/main/java/com/countrymod/item/WeddingRingItem.java:31: error: ';' expected
+  		return ActionResult.SUCCESS);
+  		                           ^
+  8 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights.
+
+BUILD FAILED in 3m 48s
+1 actionable task: 1 executed

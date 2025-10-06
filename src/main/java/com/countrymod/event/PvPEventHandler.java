@@ -36,10 +36,13 @@ public class PvPEventHandler implements ServerLivingEntityEvents.AfterDeath {
                                 killer.sendMessage(Text.literal("You have killed the leader of " + countryName + "! Capture their flag within 5 minutes to take over!"), false);
                                 
                                 // Notify all citizens
-                                for (ServerPlayerEntity player : killer.getServerWorld().getServer().getPlayerManager().getPlayerList()) {
+                                var server = CountryMod.getServer();
+                                if (server != null) {
+                                    for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                                         if (country.getCitizen(player.getUuid()) != null) {
                                                 player.sendMessage(Text.literal("WARNING: Your country is under attack! Defend the flag!"), false);
                                         }
+                                    }
                                 }
                                 
                                 CountryMod.LOGGER.info("Country {} is under attack by {}", countryName, killer.getName().getString());

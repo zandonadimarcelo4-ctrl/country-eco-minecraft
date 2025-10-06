@@ -1,33 +1,39 @@
 package com.countrymod.item;
 
 import com.countrymod.client.gui.LotteryScreen;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 /**
  * Lottery Ticket - Buy tickets and win the jackpot!
  */
 public class LotteryTicketItem extends Item {
-	public LotteryTicketItem(Settings settings) {
-		super(settings.maxCount(64));
-	}
-	
-	@Override
-	public ActionResult use(World world, PlayerEntity user, Hand hand) {
-		if (world.isClient()) {
-			MinecraftClient client = MinecraftClient.getInstance();
-			client.execute(() -> {
-				client.setScreen(new LotteryScreen());
-			});
-		} else {
-			user.sendMessage(Text.literal("§e§l[LOTTERY] §fFeeling lucky? Buy a ticket!"), false);
-		}
-		return ActionResult.SUCCESS);
-	}
+        public LotteryTicketItem(Settings settings) {
+                super(settings.maxCount(64));
+        }
+        
+        @Override
+        public ActionResult use(World world, PlayerEntity user, Hand hand) {
+                if (world.isClient()) {
+                        handleClientSide();
+                } else {
+                        user.sendMessage(Text.literal("§e§l[LOTTERY] §fFeeling lucky? Buy a ticket!"), false);
+                }
+                return ActionResult.SUCCESS;
+        }
+
+        @Environment(EnvType.CLIENT)
+        private void handleClientSide() {
+                MinecraftClient client = MinecraftClient.getInstance();
+                client.execute(() -> {
+                        client.setScreen(new LotteryScreen());
+                });
+        }
 }
