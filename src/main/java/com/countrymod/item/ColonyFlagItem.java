@@ -4,10 +4,12 @@ import com.countrymod.client.gui.ColonyCreationScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -33,11 +35,11 @@ public class ColonyFlagItem extends Item {
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (world.isClient()) {
             user.sendMessage(Text.literal("Place the flag on the ground to create a colony!"), false);
         }
-        return ActionResult.PASS;
+        return TypedActionResult.pass(user.getStackInHand(hand));
     }
 
     /**
